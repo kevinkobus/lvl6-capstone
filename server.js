@@ -1,20 +1,38 @@
 const express = require("express");
+const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const app = express();
+require("dotenv").config();
+const { expressjwt } = require("express-jwt");
 
+// Middleware
 app.use(express.json());
 app.use(morgan("dev"));
 
+// Connect to DB w/Mongoose
 mongoose
-  .connect("mongodb://localhost:27017/golfcoursedb")
-  .then(() => console.log("Connected to the Golf Course DB"));
+  .connect("mongodb://localhost:27017/golftrackerdb")
+  .then(() => console.log("Connected to the Golf Tracker DB"));
 
-app.use("/api/golfer", require("./routes/golferRouter.js"));
-app.use("/api/course", require("./routes/courseRouter.js"))
+// Authorization route
+app.use("/api/v1/auth", require("./routes/authRouter.js"));
 
+// Express-jwt/dotenv for user authentication w/token
+app.use(
+  "/api",
+  expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
+);
+
+// ??? need to be updated for user authentication
+// app.use("/api/v1/golfer", require("./routes/golferRouter.js"));
+// app.use("/api/v1/course", require("./routes/courseRouter.js"));
+
+// Error handling
 app.use((err, req, res, next) => {
   console.log(err);
+  if (err.name === "UnathorizedError") {
+    res.status(err.status);
+  }
   return res.send({ errMsg: err.message });
 });
 
