@@ -15,17 +15,17 @@ mongoose
   .then(() => console.log("Connected to the Golf Tracker DB"));
 
 // Authorization route
-app.use("/api/v1/auth", require("./routes/authRouter.js"));
+app.use("/api/auth", require("./routes/authRouter.js"));
 
 // Express-jwt/dotenv for user authentication w/token
 app.use(
-  "/api",
+  "/api/gatekeeper",
   expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
 );
 
 // ??? need to be updated for user authentication
-// app.use("/api/v1/golfer", require("./routes/golferRouter.js"));
-// app.use("/api/v1/course", require("./routes/courseRouter.js"));
+// app.use("/api/golfer", require("./routes/golferRouter.js"));
+app.use("/api/gatekeeper/course", require("./routes/courseRouter.js"));
 
 // Error handling
 app.use((err, req, res, next) => {

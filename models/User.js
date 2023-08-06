@@ -35,15 +35,14 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  courses: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Course",
-    },
-  ],
+  // courses: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "Course",
+  //   },
+  // ],
 });
 
 module.exports = mongoose.model("User", userSchema);
-
 
 // ideas - bio, player since, home course, favorite course

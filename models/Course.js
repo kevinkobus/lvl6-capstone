@@ -15,17 +15,26 @@ const courseSchema = new Schema({
     type: String,
     required: true,
   },
+  region: {
+    type: String,
+  },
   par: {
     type: Number,
     required: true,
   },
   website: {
     type: String,
+    required: true,
   },
   likes: {
     type: Number,
     default: 0,
-  }
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Course", courseSchema);

@@ -1,15 +1,18 @@
 const express = require("express");
 const courseRouter = express.Router();
-const Course = require("../models/course.js");
+const Course = require("../models/Course.js");
 
-// POST - Add new course to the DB
+// ----- Routes requiring authentication -----
+
+// POST - Add new course
 courseRouter.post("/", (req, res, next) => {
+  req.body.user = req.auth._id
       // check if the course already exists, return error msg if it does
-  Course.findOne({ username: req.body.courseName.toLowerCase() })
-    if (course) {
-        res.status(403);
-        return next(new Error("This Golf Course already exists"));
-      }
+  // Course.findOne({ username: req.body.courseName.toLowerCase() })
+  //   if (course) {
+  //       res.status(403);
+  //       return next(new Error("This Golf Course already exists"));
+  //     }
   const newCourse = new Course(req.body);
   newCourse
     .save()
@@ -37,33 +40,44 @@ courseRouter.get("/user", (req, res, next) => {
       });
   });
 
+  // Delete a course
+courseRouter.delete("/:courseId", (req, res, next) => {
+  Course.findOneAndDelete({ _id: req.params.courseId, user: req.auth._id })
+    .then((deletedCourse) => {
+      if (!deletedCourse) {
+        return res.status(404).send("Course not found");
+      }
+      return res
+        .status(200)
+        .send(
+          `Successfully deleted Course: ${deletedCourse.title} from your profile`
+        );
+    })
+    .catch((err) => {
+      res.status(500);
+      return next(err);
+    });
+});
 
-// GET - Pull up one course
-// courseRouter.get("/:courseID", (req, res, next) => {
-//   Course.findById({ _id: req.params.courseId })
-//     .then((foundCourse) => {
-//       if (!foundCourse) {
-//         return res.status(404).send("Course not found");
-//       }
-//       return res.status(200).send(foundCourse);
-//     })
-//     .catch((err) => {
-//       res.status(500);
-//       return next(err);
-//     });
-// });
+// Update a Course
+courseRouter.put("/:courseId", (req, res, next) => {
+  Course.findOneAndUpdate(
+    { _id: req.params.courseId, user: req.auth._id },
+    req.body,
+    { new: true }
+  )
+    .then((updatedCourse) => {
+      if (!updatedCourse) {
+        return res.status(404).send("Course not found under your profile");
+      }
+      return res.status(200).send(updatedCourse);
+    })
+    .catch((err) => {
+      res.status(500);
+      return next(err);
+    });
+});
 
-// GET all courses
-// courseRouter.get("/", (req, res, next) => {
-//   Course.find({})
-//     .then((courses) => {
-//       return res.status(200).send(courses);
-//     })
-//     .catch((err) => {
-//       res.status(500);
-//       return next(err);
-//     });
-// });
 
 // Like a course
 // courseRouter.put("/like/:courseID", (req, res, next) => {
@@ -83,7 +97,34 @@ courseRouter.get("/user", (req, res, next) => {
 //     });
 // });
 
-module.exports = courseRouter;
+// ----- Routes not requiring authentication -----
+
+// GET - Pull up one course
+courseRouter.get("/:courseID", (req, res, next) => {
+  Course.findById({ _id: req.params.courseId })
+    .then((foundCourse) => {
+      if (!foundCourse) {
+        return res.status(404).send("Course not found");
+      }
+      return res.status(200).send(foundCourse);
+    })
+    .catch((err) => {
+      res.status(500);
+      return next(err);
+    });
+});
+
+// GET all courses
+courseRouter.get("/", (req, res, next) => {
+  Course.find({})
+    .then((courses) => {
+      return res.status(200).send(courses);
+    })
+    .catch((err) => {
+      res.status(500);
+      return next(err);
+    });
+});
 
 // Get Course(s) by search term
 // courseRouter.get("/search", (req, res, next) => {
@@ -118,3 +159,5 @@ module.exports = courseRouter;
 // })
 // })
 // })
+
+module.exports = courseRouter;
