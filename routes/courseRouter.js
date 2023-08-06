@@ -50,7 +50,7 @@ courseRouter.delete("/:courseId", (req, res, next) => {
       return res
         .status(200)
         .send(
-          `Successfully deleted Course: ${deletedCourse.title} from your profile`
+          `Successfully deleted Course: ${deletedCourse.courseName} from your profile`
         );
     })
     .catch((err) => {
@@ -97,7 +97,7 @@ courseRouter.put("/:courseId", (req, res, next) => {
 //     });
 // });
 
-// ----- Routes not requiring authentication -----
+
 
 // GET - Pull up one course
 courseRouter.get("/:courseID", (req, res, next) => {

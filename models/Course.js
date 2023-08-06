@@ -22,6 +22,15 @@ const courseSchema = new Schema({
     type: Number,
     required: true,
   },
+  played: {
+    type: Boolean,
+    default: false,
+  },
+  score: {
+    type: Number,
+    minlength: 2,
+    maxlength: 3,
+  },
   website: {
     type: String,
     required: true,
