@@ -14,9 +14,9 @@ function Profile() {
   return (
     <div className="profile">
       <h1>Welcome {username}!</h1>
-      <h3>Add an Issue</h3>
+      <h3>Add a Course</h3>
       <CourseForm addGolfCourse={addGolfCourse} />
-      <h3>Your Issues</h3>
+      <h3>Courses you've played</h3>
       <CourseList golfCourses={golfCourses} />
     </div>
   );

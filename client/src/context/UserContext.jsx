@@ -26,7 +26,7 @@ function UserContextProvider(props) {
   // User signup
   function signup(credentials) {
     axios
-      .post("/auth/signup", credentials)
+      .post("/api/auth/signup", credentials)
       .then((res) => {
         const { user, token } = res.data;
         localStorage.setItem("token", token); //saving the token data to localStorage so not to lose it after browser refresh
@@ -44,7 +44,7 @@ function UserContextProvider(props) {
   // User login
   function login(credentials) {
     axios
-      .post("/auth/login", credentials)
+      .post("/api/auth/login", credentials)
       .then((res) => {
         const { user, token } = res.data;
         localStorage.setItem("token", token); //saving the token data to localStorage so not to lose it after browser refresh
@@ -73,7 +73,7 @@ function UserContextProvider(props) {
 
   function getUserCourses() {
     userAxios
-      .get("/gatekeeper/course/user")
+      .get("/api/gatekeeper/course/user")
       .then((res) => {
         setUserState((prevState) => ({
           ...prevState,
@@ -85,7 +85,7 @@ function UserContextProvider(props) {
 
   function addGolfCourse(newCourse) {
     userAxios
-      .post("/gatekeeper/course", newCourse)
+      .post("api/gatekeeper/course", newCourse)
       // .then((res) => console.log(res))
       .then((res) => {
         setUserState((prevState) => ({
