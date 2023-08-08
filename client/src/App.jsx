@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Auth from './components/Auth'
 import Profile from './components/Profile'
 import Public from './components/Public'
+import Footer from "./components/Footer"
 import { UserContext } from "./context/UserContext"
 
 function App(){
@@ -25,6 +26,7 @@ function App(){
           element={<Public />}
         />
       </Routes>
+      <Footer />
     </div>
   )
 }
