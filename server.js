@@ -23,8 +23,6 @@ app.use(
   expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
 );
 
-// ??? need to be updated for user authentication
-// app.use("/api/golfer", require("./routes/golferRouter.js"));
 app.use("/api/gatekeeper/course", require("./routes/courseRouter.js"));
 
 // Error handling
