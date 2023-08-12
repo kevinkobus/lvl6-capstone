@@ -33,6 +33,8 @@ function Auth(){
     resetAuthErr()
   }
 
+// need an AuthForm for Login and an AuthForm for Signup since signup needs more input fields
+
   return (
     <div className="auth-container">
       <h1>Golf Tracker</h1>
