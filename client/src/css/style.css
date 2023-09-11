@@ -38,6 +38,11 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  background-image: url("../assets/open-page-background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 950px 550px;
+  background-color: #03f0fc;
 }
 
 .auth-container > h1 {

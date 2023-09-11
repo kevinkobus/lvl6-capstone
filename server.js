@@ -15,7 +15,7 @@ mongoose
   .then(() => console.log("Connected to the Golf Tracker DB"));
 
 // Authorization route
-app.use("/api/auth", require("./routes/authRouter.js"));
+app.use("/auth", require("./routes/authRouter.js"));
 
 // Express-jwt/dotenv for user authentication w/token
 app.use(
