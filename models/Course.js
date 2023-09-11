@@ -7,7 +7,7 @@ const courseSchema = new Schema({
     type: String,
     required: true,
   },
-  country: {
+  state: {
     type: String,
     required: true,
   },
@@ -15,16 +15,9 @@ const courseSchema = new Schema({
     type: String,
     required: true,
   },
-  region: {
-    type: String,
-  },
   par: {
     type: Number,
     required: true,
-  },
-  played: {
-    type: Boolean,
-    default: false,
   },
   score: {
     type: Number,
@@ -33,15 +26,32 @@ const courseSchema = new Schema({
   },
   website: {
     type: String,
-    required: true,
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
-  user: {
+  likes: [
+    {
+      golfer: {
+        type: Schema.Types.ObjectId,
+        ref: "Golfer",
+      },
+      golfername: {
+        type: String,
+      },
+    },
+  ],
+  dislikes: [
+    {
+      golfer: {
+        type: Schema.Types.ObjectId,
+        ref: "Golfer",
+      },
+      golfername: {
+        type: String,
+      },
+    },
+  ],
+  golfer: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Golfer",
     required: true,
   },
 });

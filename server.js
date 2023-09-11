@@ -23,7 +23,11 @@ app.use(
   expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
 );
 
+// Course route
 app.use("/api/gatekeeper/course", require("./routes/courseRouter.js"));
+
+// Comment route
+app.use("/api/gatekeeper/comment", require("./routes/commentRouter.js"));
 
 // Error handling
 app.use((err, req, res, next) => {

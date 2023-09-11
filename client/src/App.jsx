@@ -5,11 +5,11 @@ import Auth from './components/Auth'
 import Profile from './components/Profile'
 import Public from './components/Public'
 import Footer from "./components/Footer"
-import { UserContext } from "./context/UserContext"
+import { GolferContext } from "./context/GolferContext"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 function App(){
-  const { token, logout } = useContext(UserContext)
+  const { token, logout } = useContext(GolferContext)
   return (
     <div className="app">
       {token && <Navbar logout={logout} token={token} />}
