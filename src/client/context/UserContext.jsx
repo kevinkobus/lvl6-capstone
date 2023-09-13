@@ -1,44 +1,44 @@
 import React, { useState, createContext, useContext } from "react";
 import axios from "axios";
-import { CourseContext } from "./CourseContext";
+import { IssuesContext } from "./CourseContext";
 
 // Declaring context as a variable to export
-const GolferContext = createContext();
+const UserContext = createContext();
 
 // Creating another version of axios to intercept user token so it gets passed with the authorization header
-const golferAxios = axios.create();
+const userAxios = axios.create();
 
-golferAxios.interceptors.request.use((config) => {
+userAxios.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// Creating context provider for golfer signup/login and authentication to export
-function GolferContextProvider(props) {
+// Creating context provider for user signup/login and authentication to export
+function UserContextProvider(props) {
 
-  const { getGolferCourses, getAllCourses } = useContext(CourseContext);
+  const { getUserIssues, getPublicIssues } = useContext(IssuesContext);
 
   const initState = {
-    golfer: JSON.parse(localStorage.getItem("golfer")) || {},
+    user: JSON.parse(localStorage.getItem("user")) || {},
     token: localStorage.getItem("token") || "",
-    courses: [],
+    issues: [],
   };
 
   // Setting state for user's info and set initState from above as default
-  const [golferState, setGolferState] = useState(initState);
+  const [userState, setUserState] = useState(initState);
 
-  // Golfer signup
+  // User signup
   function signup(credentials) {
     axios
       .post("/auth/signup", credentials)
       .then((res) => {
-        const { golfer, token } = res.data;
+        const { user, token } = res.data;
         localStorage.setItem("token", token); //saving the token data to localStorage so not to lose it after browser refresh
-        localStorage.setItem("golfer", JSON.stringify(user)); //saving the user data to localStorage so not to lose it after browser refresh
-        setGolferState((prevState) => ({
-          ...prevState,
-          golfer,
+        localStorage.setItem("user", JSON.stringify(user)); //saving the user data to localStorage so not to lose it after browser refresh
+        setUserState((prevUserState) => ({
+          ...prevUserState,
+          user,
           token,
         }));
       })
@@ -46,19 +46,19 @@ function GolferContextProvider(props) {
       .catch((err) => handleAuthErr(err.response.data.errMsg));
   }
 
-  // Golfer login
+  // User login
   function login(credentials) {
     axios
       .post("/auth/login", credentials)
       .then((res) => {
-        const { golfer, token } = res.data;
+        const { user, token } = res.data;
         localStorage.setItem("token", token); //saving the token data to localStorage so not to lose it after browser refresh
-        localStorage.setItem("golfer", JSON.stringify(golfer)); //saving the golfer data to localStorage so not to lose it after browser refresh
-        getGolferCourses();
-        getAllCourses();
-        setGolferState((prevGolferState) => ({
-          ...prevGolferState,
-          golfer,
+        localStorage.setItem("user", JSON.stringify(user)); //saving the user data to localStorage so not to lose it after browser refresh
+        getUserIssues();
+        getPublicIssues();
+        setUserState((prevUserState) => ({
+          ...prevUserState,
+          user,
           token,
         }));
       })
@@ -66,25 +66,25 @@ function GolferContextProvider(props) {
       .catch((err) => handleAuthErr(err.response.data.errMsg));
   }
 
-  // Golfer logout which removes golfer info from localStorage and resets state
+  // User logout which removes user info from localStorage and resets state
   function logout() {
     localStorage.removeItem("token");
-    localStorage.removeItem("golfer");
-    setGolferState({
-      golfer: {},
+    localStorage.removeItem("user");
+    setUserState({
+      user: {},
       token: "",
-      courses: [],
+      issues: [],
     });
   }
 
-  //   // Update golfer information (if a golfer wants to change something about their username or password)
+  //   // Update user information (if a user wants to change something about their username or password)
 
-  //   function updateGolfer(updatedGolfer) {
-  //     golferAxios.put("/api/golfer", updatedGolfer)
+  //   function updateUser(updatedUser) {
+  //     userAxios.put("/api/user", updatedUser)
   //         .then(res => {
-  //             localStorage.setItem("golfer", JSON.stringify(res.data))
-  //             setGolferState(prevState => ({
-  //                 ...prevState,
+  //             localStorage.setItem("user", JSON.stringify(res.data))
+  //             setUserState(prevUserState => ({
+  //                 ...prevUserState,
   //                 user: res.data
   //             }))
   //         })
@@ -93,7 +93,7 @@ function GolferContextProvider(props) {
 
   // Handling Errors
   function handleAuthErr(errMsg) {
-    setGolferState((prevState) => ({
+    setUserState((prevState) => ({
       ...prevState,
       errMsg,
     }));
@@ -101,7 +101,7 @@ function GolferContextProvider(props) {
 
   // Reseting the authorization error
   function resetAuthErr() {
-    setGolferState((prevState) => ({
+    setUserState((prevState) => ({
       ...prevState,
       errMsg: "",
     }));
@@ -109,20 +109,20 @@ function GolferContextProvider(props) {
 
   //   returning/providing the userState and other values to be consumed by any component that imports them
   return (
-    <GolferContext.Provider
+    <UserContext.Provider
       value={{
-        ...golferState,
+        ...userState,
         signup,
         login,
         logout,
         handleAuthErr,
         resetAuthErr,
-        // updateGolfer,
+        // updateUser,
       }}
     >
       {props.children}
-    </GolferContext.Provider>
+    </UserContext.Provider>
   );
 }
 
-export { GolferContextProvider, GolferContext };
+export { UserContextProvider, UserContext };

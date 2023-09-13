@@ -1,59 +1,47 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Course model/blueprint
-const courseSchema = new Schema({
-  courseName: {
+const issueSchema = new Schema({
+  title: {
     type: String,
     required: true,
   },
-  state: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  par: {
-    type: Number,
-    required: true,
-  },
-  score: {
-    type: Number,
-    minlength: 2,
-    maxlength: 3,
-  },
-  website: {
+  description: {
     type: String,
   },
-  likes: [
-    {
-      golfer: {
-        type: Schema.Types.ObjectId,
-        ref: "Golfer",
-      },
-      golfername: {
-        type: String,
-      },
-    },
-  ],
-  dislikes: [
-    {
-      golfer: {
-        type: Schema.Types.ObjectId,
-        ref: "Golfer",
-      },
-      golfername: {
-        type: String,
-      },
-    },
-  ],
-  golfer: {
+  user: {
     type: Schema.Types.ObjectId,
-    ref: "Golfer",
+    ref: "User",
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  yesVotes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+      username: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  noVotes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+      username: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
-module.exports = mongoose.model("Course", courseSchema);
+module.exports = mongoose.model("Issue", issueSchema);

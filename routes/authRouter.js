@@ -1,27 +1,27 @@
 const express = require("express");
 const authRouter = express.Router();
-const Golfer = require("../models/Golfer");
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 // Signup
 authRouter.post("/signup", (req, res, next) => {
   // check if the username already exists, return error msg if it does
-  Golfer.findOne({ username: req.body.username.toLowerCase() }).then((user) => {
+  User.findOne({ username: req.body.username.toLowerCase() }).then((user) => {
     if (user) {
       res.status(403);
       return next(new Error("This username already exists"));
     }
-    // saving the new golfer
-    const newGolfer = new Golfer(req.body);
+    // saving the new user
+    const newUser = new User(req.body);
     // saving to the db
-    newGolfer
+    newUser
       .save()
-      .then((savedGolfer) => {
-        // return the token and golfer (payload, secret from .env)
-        const token = jwt.sign(savedGolfer.withoutPassword(), process.env.SECRET);
+      .then((savedUser) => {
+        // return the token and user (payload, secret from .env)
+        const token = jwt.sign(savedUser.withoutPassword(), process.env.SECRET);
         return res
           .status(200)
-          .send({ token, golfer: savedGolfer.withoutPassword() });
+          .send({ token, user: savedUser.withoutPassword() });
       })
       .catch((err) => {
         res.status(500);
@@ -33,20 +33,20 @@ authRouter.post("/signup", (req, res, next) => {
 // Login
 authRouter.post("/login", (req, res, next) => {
   // check if login info exists and/or is accurate
-  golfer.findOne({ username: req.body.username.toLowerCase() })
-    .then((golfer) => {
+  User.findOne({ username: req.body.username.toLowerCase() })
+    .then((user) => {
       // if doesn't exist and/or is not accurate throw this error msg
-      if (!golfer) {
+      if (!user) {
         res.status(403);
         return next(new Error("Username and/or password are incorrect"));
       }
       // manual way to check if password is correct
-      // if (req.body.password !== golfer.password) {
+      // if (req.body.password !== user.password) {
       //   res.status(403)
       //   return next(new Error("Username or Password are incorrect"))
       // }
       // bcrypt way of checking if password is correct
-      golfer.checkPassword(req.body.password, (err, isMatch) => {
+      user.checkPassword(req.body.password, (err, isMatch) => {
         if (err) {
           res.status(403);
           return next(new Error("Username and/or Password are incorrect"));
@@ -56,15 +56,17 @@ authRouter.post("/login", (req, res, next) => {
           return next(new Error("Username and/or Password are incorrect"));
         }
         //   otherwise return the token and user (payload, secret from .env)
-        const token = jwt.sign(golfer.withoutPassword(), process.env.SECRET);
-        return res.status(200).send({ token, golfer: golfer.withoutPassword() });
+        const token = jwt.sign(user.withoutPassword(), process.env.SECRET);
+        return res.status(200).send({ token, user: user.withoutPassword() });
       });
     })
-
     .catch((err) => {
       res.status(500);
       return next(err);
     });
 });
+
+// Update user username and/or password
+
 
 module.exports = authRouter;

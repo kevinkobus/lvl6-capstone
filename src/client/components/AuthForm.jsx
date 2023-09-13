@@ -13,7 +13,7 @@ function AuthForm(props){
   } = props
   
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="auth-form">
       <input 
         type="text" 
         value={username} 
@@ -26,7 +26,7 @@ function AuthForm(props){
         name="password" 
         onChange={handleChange} 
         placeholder="Password"/>
-      <button>{ btnText }</button>
+      <button className="authForm-btn">{ btnText }</button>
       <p style={{color: "red"}}>{ errMsg }</p>
     </form>
   )

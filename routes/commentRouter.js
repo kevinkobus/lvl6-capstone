@@ -1,14 +1,14 @@
 const express = require("express");
 const commentRouter = express.Router();
 const Comment = require("../models/Comment.js");
-const Golfer = require("../models/Golfer.js")
+const User = require("../models/User.js")
 const Course = require("../models/Course.js")
 
-// Add new comment to a course
+// Add new comment
 commentRouter.post("/:courseId", (req, res, next) => {
   const enteredComment = {
     comment: req.body.comment,
-    golfer: req.params.courseId,
+    user: req.params.courseId,
     course: req.params.courseId
   }
     const newComment = new Comment(enteredComment)
@@ -23,9 +23,9 @@ commentRouter.post("/:courseId", (req, res, next) => {
     });
 });
 
-// // Get all comments for a specific course
+// // Get all comments for a specific issue
 commentRouter.get("/:courseId", (req, res, next) => {
-  Comment.find({ course: req.params.courseId })
+  Comment.find({ issue: req.params.courseId })
     .then((comments) => {
       return res.status(200).send(comments);
     })
@@ -37,7 +37,7 @@ commentRouter.get("/:courseId", (req, res, next) => {
 
 // Delete a comment
 commentRouter.delete("./commentId", (req, res, next) => {
-  Comment.findOneAndDelete({ _id: req.params.commentId, golfer: req.auth._id })
+  Comment.findOneAndDelete({ _id: req.params.commentId, user: req.auth._id })
   .then((deletedComment) => {
     // if statement to help with test route with Postman
     if (!deletedComment) {
@@ -46,7 +46,7 @@ commentRouter.delete("./commentId", (req, res, next) => {
     return res
       .status(200)
       .send(
-        `Successfully deleted Comment: ${deletedComment.title} from the database`
+        `Successfully deleted Comment: ${deletedComment} from the database`
       );
   })
   .catch((err) => {
@@ -58,7 +58,7 @@ commentRouter.delete("./commentId", (req, res, next) => {
 // Update/Edit a comment
 commentRouter.put("/:commentId", (req, res, next) => {
   Comment.findOneAndUpdate(
-    { _id: req.params.commentId, golfer: req.auth._id },
+    { _id: req.params.commentId, user: req.auth._id },
     req.body,
     { new: true }
   )

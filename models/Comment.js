@@ -6,20 +6,20 @@ const commentSchema = new Schema({
     type: String,
     required: true,
   },
-  postedBy: {
+  commentor: {
     type: String,
   },
   username: {
     type: String,
   },
-  golfer: {
+  user: {
     type: Schema.Types.ObjectId,
-    ref: "Golfer",
+    ref: "User",
     required: true,
   },
-  course: {
+  issue: {
     type: Schema.Types.ObjectId,
-    ref: "Course",
+    ref: "Issue",
     required: true,
   },
   createdAt: {
