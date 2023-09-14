@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import Comment from "./Comment.jsx";
 import CommentForm from "./CommentForm.jsx"
-import { IssuesContext } from "../context/CourseContext.jsx";
+import { CourseContext } from "../context/CourseContext.jsx";
 
 function CommentList(props) {
-  const { comments } = useContext(IssuesContext);
+  const { comments } = useContext(CourseContext);
   // const {} = props;
 
 

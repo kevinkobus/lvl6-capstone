@@ -2,7 +2,7 @@ import React, { useState, createContext, useContext } from "react";
 import axios from "axios";
 // import { UserContext } from "./UserContext"
 
-const IssuesContext = createContext();
+const CourseContext = createContext();
 
 const userAxios = axios.create();
 
@@ -18,19 +18,19 @@ function CourseContextProvider(props) {
 //   user: { username }
 //  } = useContext(UserContext)
 
-  // State for Issues
-  // Setting the initial state for user and public issues
-  const initUserIssueState = {
-    issues: [],
+  // State for Courses
+  // Setting the initial state for user and all courses
+  const initUserCourseState = {
+    courses: [],
   };
-  const initPublicIssueState = {
-    publicIssues: [],
+  const initPublicCourseState = {
+    publicCourses: [],
   };
 
-  // Setting state for user and public issues
-  const [userIssueState, setUserIssueState] = useState(initUserIssueState);
-  const [publicIssueState, setPublicIssueState] =
-    useState(initPublicIssueState);
+  // Setting state for user and all courses
+  const [userCourseState, setUserCourseState] = useState(initUserCourseState);
+  const [publicCourseState, setPublicCourseState] =
+    useState(initPublicCourseState);
 
   // State for Comments
   // Setting the initial state of comments
@@ -41,144 +41,144 @@ function CourseContextProvider(props) {
   // Setting state for comments
   const [commentState, setCommentState] = useState(initComment);
 
-  // Functions for Issues
-  // Add Issue
-  function addUserIssue(newIssue) {
+  // Functions for Courses
+  // Add Course
+  function addUserCourse(newCourse) {
     userAxios
-      .post("/api/issue", newIssue)
+      .post("/api/gatekeeper/course", newCourse)
       // .then((res) => console.log(res))
       .then((res) => {
-        setUserIssueState((prevState) => ({
+        setUserCourseState((prevState) => ({
           ...prevState,
-          issues: [...prevState.issues, res.data],
+          courses: [...prevState.courses, res.data],
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
-  // Getting user issues
-  function getUserIssues() {
+  // Getting user courses
+  function getUserCourses() {
     userAxios
-      .get("/api/issue/user")
+      .get("/api/gatekeeper/course/user")
       .then((res) => {
-        setUserIssueState((prevState) => ({
+        setUserCourseState((prevState) => ({
           ...prevState,
-          issues: res.data,
+          courses: res.data,
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
-  // Get user issues and associated comments
-  // function getUserIssues() {
+  // Get user courses and associated comments
+  // function getUserCourses() {
   //   userAxios
-  //     .get("/api/issue/user")
+  //     .get("/api/gatekeeper/course/user")
   //     .then((res) => {
   //       Promise.all(
-  //         res.data.map(async (issue) => {
+  //         res.data.map(async (course) => {
   //           return {
-  //             ...issue,
-  //             comments: await getIssueComments(issue._id).then((comments) => {
-  //               return issue.comments;
+  //             ...course,
+  //             comments: await getIssueComments(course._id).then((comments) => {
+  //               return course.comments;
   //             }),
   //           };
   //         })
   //       );
-  //       setUserIssueState((prevState) => ({
+  //       setUserCourseState((prevState) => ({
   //         ...prevState,
-  //         issues: res.data,
+  //         courses: res.data,
   //       }));
   //     })
   //     .catch((err) => console.log(err.response.data.errMsg));
   // }
 
-  // Getting all (public) issues and their comments
-  function getPublicIssues() {
+  // Getting all (public) courses and their comments
+  function getPublicCourses() {
     userAxios
-      .get("/api/issue")
+      .get("/api/gatekeeper/course")
       .then((res) => {
-        setPublicIssueState((prevState) => ({
+        setPublicCourseState((prevState) => ({
           ...prevState,
-          publicIssues: res.data,
+          publicCourses: res.data,
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
-  // Deleting a user issue (and eventually its comments?)
-  function deleteIssue(issueId) {
+  // Deleting a user course (and eventually its comments?)
+  function deleteCourse(courseId) {
     userAxios
-      .delete(`/api/issue/${issueId}`)
+      .delete(`/api/gatekeeper/course/${courseId}`)
       .then((res) => {
-        setUserIssueState((prevState) => ({
+        setUserCourseState((prevState) => ({
           ...prevState,
-          issues: prevState.issues.filter((issue) => issue._id !== issueId),
+          courses: prevState.courses.filter((course) => course._id !== courseId),
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
-  // Editing a user issue
-  function editIssue(issueId, updatedIssue) {
+  // Editing a user course
+  function editCourse(courseId, updatedCourse) {
     userAxios
-      .put(`/api/issue/${issueId}`, updatedIssue)
+      .put(`/api/gatekeeper/course/${courseId}`, updatedCourse)
       .then((res) => {
-        setUserIssueState((prevState) => ({
+        setUserCourseState((prevState) => ({
           ...prevState,
-          issues: prevState.issues.map((issue) =>
-            issue._id === issueId ? res.data : issue
+          courses: prevState.courses.map((course) =>
+            course._id === courseId ? res.data : course
           ),
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
-  // "Yes" voting an issue
-  //   function yesVote(issueId) {
+  // "Yes" voting an course
+  //   function yesVote(courseId) {
   //     userAxios
-  //       .put(`/api/issue/${issueId}/yesVote`)
+  //       .put(`/api/gatekeeper/course/${courseId}/yesVote`)
   //       .then((res) => {
   //         // console.log(res.data);
-  //         setAllIssues((prevIssues) =>
-  //           prevIssues.map((issue) => (issueId !== issue._id ? issue : res.data))
+  //         setAllCourses((prevCourses) =>
+  //           prevCourses.map((course) => (courseId !== course._id ? course : res.data))
   //         );
   //         setUserState((prevUserState) => ({
   //           ...prevUserState,
-  //           issues: prevUserState.issues.map((issue) =>
-  //             issueId !== issue._id ? issue : res.data
+  //           courses: prevUserState.courses.map((course) =>
+  //             courseId !== course._id ? course : res.data
   //           ),
   //         }));
-  //         console.log(allIssues);
+  //         console.log(allCourses);
   //       })
   //       .catch((err) => console.log(err));
   //   }
 
-  // "No" voting an issue
-  //   function noVote(issueId) {
+  // "No" voting an course
+  //   function noVote(courseId) {
   //     userAxios
-  //       .put(`/api/issue/${issueId}/noVote`)
+  //       .put(`/api/gatekeeper/course/${courseId}/noVote`)
   //       .then((res) => {
-  //         setAllIssues((prevIssues) =>
-  //           prevIssues.map((issue) => (issueId !== issue._id ? issue : res.data))
+  //         setAllCourses((prevCourses) =>
+  //           prevCourses.map((course) => (courseId !== course._id ? course : res.data))
   //         );
   //         setUserState((prevUserState) => ({
   //           ...prevUserState,
-  //           issues: prevUserState.issues.map((issue) =>
-  //             issueId !== issue._id ? issue : res.data
+  //           courses: prevUserState.courses.map((course) =>
+  //             courseId !== course._id ? course : res.data
   //           ),
   //         }));
-  //         console.log(allIssues);
+  //         console.log(allCourses);
   //       })
   //       .catch((err) => console.log(err));
   //   }
   // }
 
-  // console.log(userIssueState)
+  // console.log(userCourseState)
 
   // Getting all comments for testing purposes
   function getAllComments() {
     userAxios
-      .get("/api/comment")
+      .get("/api/gatekeeper/comment")
       .then((res) => {
         setCommentState((prevState) => ({
           ...prevState,
@@ -188,10 +188,10 @@ function CourseContextProvider(props) {
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
-  // Get comments for an individual issue for testing purposes
-  function getIssueComments(issueId) {
+  // Get comments for an individual course for testing purposes
+  function getCourseComments(courseId) {
     userAxios
-      .get(`/api/comment/${issueId}`)
+      .get(`/api/gatekeeper/comment/${courseId}`)
       .then((res) => {
         setCommentState((prevState) => ({
           ...prevState,
@@ -203,7 +203,7 @@ function CourseContextProvider(props) {
 
   function addComment(newComment) {
     userAxios
-      .post("/api/comment", newComment)
+      .post("/api/gatekeeper/comment", newComment)
       // .then((res) => console.log(res))
       .then((res) => {
         setCommentState((prevState) => ({
@@ -215,25 +215,25 @@ function CourseContextProvider(props) {
   }
 
   return (
-    <IssuesContext.Provider
+    <CourseContext.Provider
       value={{
-        ...userIssueState,
-        ...publicIssueState,
-        addUserIssue,
-        getUserIssues,
-        getPublicIssues,
-        deleteIssue,
-        editIssue,
-        // "Yes" voting an issue,
-        // "No" voting an issue,
+        ...userCourseState,
+        ...publicCourseState,
+        addUserCourse,
+        getUserCourses,
+        getPublicCourses,
+        deleteCourse,
+        editCourse,
+        // "Yes" voting a course,
+        // "No" voting a course,
         ...commentState,
         getAllComments,
-        getIssueComments,
+        getCourseComments,
         addComment,
       }}
     >
       {props.children}
-    </IssuesContext.Provider>
+    </CourseContext.Provider>
   );
 }
 

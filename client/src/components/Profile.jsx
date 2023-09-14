@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import CourseForm from "./CourseForm";
 import CourseList from "./CourseList";
 import { UserContext } from "../context/UserContext";
-import { CourseContext } from "../context/CoursesContext"
+import { CourseContext } from "../context/CourseContext"
 
 function Profile() {
   const {

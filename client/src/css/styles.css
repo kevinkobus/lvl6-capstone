@@ -21,13 +21,14 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 45px;
-  background-color: #0060a9;
+  height: 55px;
+  background-color: #005e23;
+  /* font-size: 10vh; */
 }
 
-/* .navbar > Link {
-  color: white;
-} */
+.nav-link {
+  color: white
+}
 
 /* -------------------------------- */
 
@@ -45,16 +46,16 @@
 }
 
 .auth-title {
-  font-size: 2em;
-  margin: 24px;
-  color: #bf0a30;
+  font-size: 2.5em;
+  margin: 26px;
+  color: #005e23;
 }
 
 .auth-form {
-  border: 3px solid #bf0a30;
+  border: 5px solid #005e23;
   padding: 20px;
   border-radius: 5px;
-  background-color: #002868;
+  background-color: #87CEEB;
   display: flex;
   flex-direction: column;
 }
@@ -63,15 +64,15 @@
   margin: 16px 8px;
   padding: 8px;
   border-radius: 4px;
-  border: 3px solid #bf0a30;
+  border: 3px solid #005e23;
 }
 
 .authForm-btn {
   margin: 16px 8px;
   padding: 8px;
-  border: 3px solid #bf0a30;
+  border: 3px solid #ed0030;
   border-radius: 3px;
-  background-color: #f1d11d;
+  background-color: #fcf400;
 }
 
 /* -------------------------------- */

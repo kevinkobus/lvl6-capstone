@@ -23,6 +23,11 @@ const userSchema = new Schema({
     lowercase: true,
     default: ""
   },
+  handicap: {
+    type: Number,
+    min: 0,
+    max: 36,
+  },
   profilePic: {
     type: String,
     default: ""

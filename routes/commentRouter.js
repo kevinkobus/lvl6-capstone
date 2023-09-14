@@ -1,8 +1,8 @@
 const express = require("express");
 const commentRouter = express.Router();
 const Comment = require("../models/Comment.js");
-const User = require("../models/User.js")
-const Course = require("../models/Course.js")
+// const User = require("../models/User.js")
+// const Course = require("../models/Course.js")
 
 // Add new comment
 commentRouter.post("/:courseId", (req, res, next) => {

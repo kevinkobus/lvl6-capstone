@@ -1,22 +1,29 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const issueSchema = new Schema({
-  title: {
+const courseSchema = new Schema({
+  courseName: {
     type: String,
     required: true,
   },
-  description: {
+  state: {
     type: String,
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+  city: {
+    type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  par: {
+    type: Number,
+    required: true,
+  },
+  score: {
+    type: Number,
+    minlength: 2,
+    maxlength: 3,
+  },
+  website: {
+    type: String,
   },
   yesVotes: [
     {
@@ -42,6 +49,15 @@ const issueSchema = new Schema({
       },
     },
   ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model("Issue", issueSchema);
+module.exports = mongoose.model("Course", courseSchema);

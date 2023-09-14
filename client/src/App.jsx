@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./client/components/Navbar";
-import Auth from "./client/components/Auth";
-import Profile from "./client/components/Profile";
-import Public from "./client/components/Public";
-import { UserContext } from "./client/context/UserContext";
-import ProtectedRoute from "./client/components/ProtectedRoute";
+import Navbar from "./components/Navbar";
+import Auth from "./components/Auth";
+import Profile from "./components/Profile";
+import Public from "./components/Public";
+import { UserContext } from "./context/UserContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const { token, logout } = useContext(UserContext);

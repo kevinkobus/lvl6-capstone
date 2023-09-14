@@ -6,7 +6,7 @@ const commentSchema = new Schema({
     type: String,
     required: true,
   },
-  commentor: {
+  postedBy: {
     type: String,
   },
   username: {
@@ -17,9 +17,9 @@ const commentSchema = new Schema({
     ref: "User",
     required: true,
   },
-  issue: {
+  course: {
     type: Schema.Types.ObjectId,
-    ref: "Issue",
+    ref: "Course",
     required: true,
   },
   createdAt: {

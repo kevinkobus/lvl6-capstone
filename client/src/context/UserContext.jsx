@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import axios from "axios";
-import { IssuesContext } from "./CourseContext";
+import { CourseContext } from "./CourseContext";
 
 // Declaring context as a variable to export
 const UserContext = createContext();
@@ -17,7 +17,7 @@ userAxios.interceptors.request.use((config) => {
 // Creating context provider for user signup/login and authentication to export
 function UserContextProvider(props) {
 
-  const { getUserIssues, getPublicIssues } = useContext(IssuesContext);
+  const { getUserCourses, getPublicCourses } = useContext(CourseContext);
 
   const initState = {
     user: JSON.parse(localStorage.getItem("user")) || {},
@@ -31,7 +31,7 @@ function UserContextProvider(props) {
   // User signup
   function signup(credentials) {
     axios
-      .post("/auth/signup", credentials)
+      .post("/api/auth/signup", credentials)
       .then((res) => {
         const { user, token } = res.data;
         localStorage.setItem("token", token); //saving the token data to localStorage so not to lose it after browser refresh
@@ -49,13 +49,13 @@ function UserContextProvider(props) {
   // User login
   function login(credentials) {
     axios
-      .post("/auth/login", credentials)
+      .post("/api/auth/login", credentials)
       .then((res) => {
         const { user, token } = res.data;
         localStorage.setItem("token", token); //saving the token data to localStorage so not to lose it after browser refresh
         localStorage.setItem("user", JSON.stringify(user)); //saving the user data to localStorage so not to lose it after browser refresh
-        getUserIssues();
-        getPublicIssues();
+        getUserCourses();
+        getPublicCourses();
         setUserState((prevUserState) => ({
           ...prevUserState,
           user,

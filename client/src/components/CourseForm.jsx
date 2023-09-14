@@ -6,8 +6,12 @@ function CourseForm(props) {
   const { addUserCourse } = useContext(CourseContext)
 
   const initInputs = {
-    title: props.title || "",
-    description: props.description || "",
+    courseName: props.courseName || "",
+    state: props.state || "",
+    city: props.city || "",
+    par: props.par || "",
+    score: props.score || "",
+    website: props.website || "",
   };
 
   const [inputs, setInputs] = useState(initInputs);
@@ -26,24 +30,53 @@ function CourseForm(props) {
     setInputs(initInputs);
   }
 
-  const { title, description } = inputs;
+  const { courseName, state, city, par, score, website } = inputs;
   return (
     <form onSubmit={handleSubmit} className="course-form">
       <input
         type="text"
-        name="title"
-        value={title}
+        name="courseName"
+        value={courseName}
         onChange={handleChange}
-        placeholder="Title"
+        placeholder="Course Name"
       />
       <input
         type="text"
-        name="description"
-        value={description}
+        name="state"
+        value={state}
         onChange={handleChange}
-        placeholder="Description"
+        placeholder="State"
       />
-      <button id="add-issue-btn">{props.btnText}</button>
+      <input
+        type="text"
+        name="city"
+        value={city}
+        onChange={handleChange}
+        placeholder="City"
+      />
+      <input
+        type="text"
+        name="par"
+        value={par}
+        onChange={handleChange}
+        placeholder="Par"
+      />
+      <input
+        type="text"
+        name="score"
+        value={score}
+        onChange={handleChange}
+        placeholder="Score"
+      />
+      <input
+        type="text"
+        name="website"
+        value={website}
+        onChange={handleChange}
+        placeholder="website"
+      />
+
+      <button id="add-course-btn">{props.btnText}</button>
     </form>
   );
 }
