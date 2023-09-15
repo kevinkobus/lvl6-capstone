@@ -5,9 +5,7 @@ import { CourseContext } from "../context/CourseContext.jsx";
 
 function CommentList(props) {
   const { comments } = useContext(CourseContext);
-  // const {} = props;
-
-
+ 
   // console.dir(comments);
 
   return (

@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 
 function CommentForm() {
 
-  const { addComment, comment, issueId } = useContext(CourseContext);
+  const { addComment, comment, courseId, getCourseComments } = useContext(CourseContext);
   const {
     user: { username },
   } = useContext(UserContext);
@@ -23,8 +23,8 @@ function CommentForm() {
     e.preventDefault();
     const enteredComment = {
       comment,
-      commentor: username,
-      course: courseId,
+      postedBy: username,
+      course: _id,
     };
     addComment(enteredComment, courseId)
       .then(() => {
@@ -35,6 +35,7 @@ function CommentForm() {
 
   function handleToggle() {
     setCommentOpen(!commentOpen);
+    getCourseComments(course._id)
   }
 
   return (

@@ -8,7 +8,7 @@ const Comment = require("../models/Comment.js");
 commentRouter.post("/:courseId", (req, res, next) => {
   const enteredComment = {
     comment: req.body.comment,
-    user: req.params.courseId,
+    user: req.params.userId,
     course: req.params.courseId
   }
     const newComment = new Comment(enteredComment)
@@ -23,9 +23,9 @@ commentRouter.post("/:courseId", (req, res, next) => {
     });
 });
 
-// // Get all comments for a specific issue
+// // Get all comments for a specific course
 commentRouter.get("/:courseId", (req, res, next) => {
-  Comment.find({ issue: req.params.courseId })
+  Comment.find({ course: req.params.courseId })
     .then((comments) => {
       return res.status(200).send(comments);
     })

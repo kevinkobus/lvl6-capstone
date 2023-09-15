@@ -23,7 +23,6 @@
   align-items: center;
   height: 55px;
   background-color: #005e23;
-  /* font-size: 10vh; */
 }
 
 .nav-link {
@@ -89,7 +88,7 @@
   margin: 8px;
   font-size: 2.5em;
   text-align: center;
-  color: #c31a3e;
+  color: #ed0030;
 }
 
 .profile > h3 {
@@ -98,62 +97,65 @@
   text-decoration: underline;
 }
 
-.issue-form {
-  display: flex;
-  flex-direction: column;
+.course-form-container {
+  width: 50%
+}
+
+.course-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 7px;
   margin: 16px 0;
-  border: 3px solid #f1d11d;
-  padding: 16px;
+  border: 5px solid #fcf400;
+  padding: 20px;
   border-radius: 5px;
-  background-color: #0060a9;
+  background-color: #005e23;
 }
 
-.issue-form > input {
+.course-form > input {
+  margin-bottom: 4px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 3px solid #fcf400;
+}
+
+#add-course-btn {
   margin: 8px 0;
   padding: 8px;
   border-radius: 5px;
-  border: 3px solid #f1d11d;
+  background-color: #fcf400;
 }
 
-.issue-form > button {
-  margin: 8px 0;
-  padding: 8px;
-  border-radius: 5px;
-  border: 3px solid #f1d11d;
-}
-
-#add-issue-btn:hover {
-  background-color: #f1d11d;
+#add-course-btn:hover {
+  background-color:  #ed0030;
 }
 
 /* -------------------------------- */
 
-/* ISSUE & PUBLIC ISSUE PAGE STYLING */
-.issue-box {
+/* COURSE & PUBLIC COURSE PAGE STYLING */
+.course-box {
   border: 5px solid #0060a9;
   border-radius: 5px;
   width: 100%;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-evenly; */
 }
-.issue-grid {
+.course-grid {
   margin: 5px;
   display: flex;
   flex-direction: column;
   align-content: space-between;
 }
-.issue-box1 {
+.course-box1 {
   display: flex;
   flex-direction: column;
   align-content: space-around;
 }
-.issue-box2 {
+.course-box2 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.issue-box3 {
+.course-box3 {
   flex-direction: row;
   justify-content: flex-start;
 }
@@ -162,18 +164,18 @@
   width: 10%;
 }
 #yes-btn:hover {
-  background-color: rgb(12, 209, 12);
+  background-color: #005e23;
 }
 #no-btn:hover {
-  background-color: rgb(255, 34, 0);
+  background-color: #ed0030;
 }
-#edit-issue-btn,
-#delete-issue-btn {
+#edit-course-btn,
+#delete-course-btn {
   width: 10%;
   margin-right: 8px;
 }
-.issue-list,
-.public-issue-list {
+.course-list,
+.public-course-list {
   width: 90%;
   margin: auto;
   display: grid;
@@ -184,7 +186,12 @@
 .public-container {
   height: 100vh;
 }
-.public-issues-title {
+.all-courses {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 8px;
+}
+.public-course-title {
   text-align: center;
   font-size: 30px;
   margin: 5px;
@@ -201,12 +208,12 @@
 #comment-input {
   height: 10vh;
   width: 100%;
-  border: 3px solid #c31a3e;
+  border: 3px solid #ed0030;
 }
 #post-comment-btn {
-  border: 3px solid #f1d11d;
+  border: 3px solid #fcf400;
   border-radius: 3px;
 }
 #post-comment-btn:hover {
-  background-color: #f1d11d;
+  background-color: #fcf400;
 }

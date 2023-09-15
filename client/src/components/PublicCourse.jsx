@@ -1,23 +1,31 @@
 import React from "react";
+import CommentList from "./CommentList";
 // import { Link } from "react-router-dom";
 
 function PublicCourse(props) {
-  
-  const { title, description, _id } = props;
+  const { courseName, state, city, par, score, website, _id } = props;
+  // console.log(props)
 
   return (
-    <div className="course">
-      <div className="course-info">
-        <h1>Course: {title}</h1>
-        <h3>Description: {description}</h3>
+    <div className="course-box">
+      <div className="course-box1">
+        <h1>Course: {courseName}</h1>
+        <h3>State: {state}</h3>
+        <h3>City: {city}</h3>
+        <h3>Par: {par}</h3>
+        <h3>Best Score: {score}</h3>
+        <h3>Website: {website}</h3>
       </div>
-      <div className="course-btns">
-        <h4>Is this a good course</h4>
-        <button>Yes (0)</button>
-        <button>No (0)</button>
+      <div className="course-box2">
+        <h4>Do you like this course?</h4>
+        <button id="yes-btn">Yes</button>
+        <p>Yes votes: 100</p>
+        {/* {yesVotes} */}
+        <button id="no-btn">No</button>
+        <p>No votes: 100</p>
+        {/* {noVotes} */}
       </div>
-      <h3>View or add comment(s) on this course</h3>
-      {/* <Link to="/comments">Comments</Link> */}
+      <CommentList />
     </div>
   );
 }

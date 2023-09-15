@@ -8,6 +8,7 @@ function Profile() {
   const {
     addUserCourse,
     courses,
+    _id,
   } = useContext(CourseContext);
 
   const {
@@ -19,11 +20,14 @@ function Profile() {
       <h1>Welcome {username}!</h1>
       <h3>Add an Course</h3>
       <CourseForm 
-          addUserIssue={addUserCourse} 
+          addUserCourse={addUserCourse} 
           btnText="Add Course" 
           />
       <h3>Your Courses</h3>
-      <CourseList coursess={courses} />
+      <CourseList 
+          courses={courses}
+          _id={_id}
+          />
     </div>
   );
 }

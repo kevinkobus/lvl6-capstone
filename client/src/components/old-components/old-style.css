@@ -88,6 +88,13 @@
   height: 100vh;
 }
 
+.course-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  
+}
+
 .profile {
   display: flex;
   flex-direction: column;
@@ -106,7 +113,7 @@
   text-decoration: underline;
 }
 
-.profile > form {
+/* .profile > form {
   display: flex;
   flex-direction: column;
   margin: 16px 0;
@@ -114,14 +121,14 @@
   background-color: #aaa9;
   padding: 16px;
   border-radius: 5px;
-}
+} */
 
-.profile > form > input,
+/* .profile > form > input,
 .profile > form > button {
   margin: 8px 0;
   padding: 8px;
   border-radius: 5px;
-}
+} */
 
 /* Footer styling */
 .footer-container {
