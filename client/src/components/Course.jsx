@@ -2,24 +2,37 @@ import React, { useContext, useState } from "react";
 import CourseForm from "./CourseForm";
 import { CourseContext } from "../context/CourseContext";
 import CommentList from "./CommentList";
-// import { UserContext } from "../context/UserContext";
-// import { Link } from "react-router-dom";
 
 function Course(props) {
-  // console.log(props)
-  const { courseName, state, city, par, score, website, _id, handleChange, inputs } =
+ 
+  const { courseName, state, city, par, score, website, _id } =
     props;
 
   const { deleteCourse, editCourse } =
     useContext(CourseContext);
 
   const [editToggle, setEditToggle] = useState(false);
+  const [editInputs, setEditInputs] = useState({
+    courseName: courseName,
+    state: state,
+    city: city,
+    par: par,
+    score: score,
+    website: website,
+  })
 
-  // console.log(inputs)
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setEditInputs(prevInputs => ({
+      ...prevInputs,
+      [name]: value,
+    }));
+  }
 
-  function handleCourseEdit() {
-    editCourse(_id, inputs);
-    setEditToggle((prevToggle) => !prevToggle);
+  function handleCourseEdit(e) {
+    e.preventDefault();
+    editCourse(_id, editInputs);
+    setEditToggle(!editToggle);
   }
 
   return (
@@ -65,10 +78,12 @@ function Course(props) {
             par={par}
             score={score}
             website={website}
+            inputs={editInputs}
             _id={_id} 
             btnText="Save Edit"
-            handleChange={handleChange}
             submit={handleCourseEdit}
+            editToggle={editToggle}
+            handleChange={handleChange}
           />
           <button
             id="cancel-btn"

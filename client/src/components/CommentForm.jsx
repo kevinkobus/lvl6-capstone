@@ -35,7 +35,7 @@ function CommentForm() {
 
   function handleToggle() {
     setCommentOpen(!commentOpen);
-    getCourseComments(course._id)
+    getCourseComments(courseId)
   }
 
   return (

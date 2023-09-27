@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CourseForm from "./CourseForm";
 import CourseList from "./CourseList";
 import { UserContext } from "../context/UserContext";
 import { CourseContext } from "../context/CourseContext"
 
-function Profile() {
+function Profile(props) {
   const {
     addUserCourse,
     courses,
@@ -15,13 +15,40 @@ function Profile() {
     user: { username }
   } = useContext(UserContext)
 
+  const initInputs = {
+    courseName: props.courseName || "",
+    state: props.state || "",
+    city: props.city || "",
+    par: props.par || "",
+    score: props.score || "",
+    website: props.website || "",
+  };
+
+  const [inputs, setInputs] = useState(initInputs);
+
+  function handleChange(e) {
+      const { name, value } = e.target;
+      setInputs((prevInputs) => ({
+        ...prevInputs,
+        [name]: value,
+      }));
+    }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    addUserCourse(inputs);
+    setInputs(initInputs);
+  }
+
   return (
     <div className="profile">
       <h1>Welcome {username}!</h1>
       <h3>Add an Course</h3>
-      <CourseForm 
-          addUserCourse={addUserCourse} 
+      <CourseForm  
           btnText="Add Course" 
+          submit={handleSubmit}
+          handleChange={handleChange}
+          inputs={inputs}
           />
       <h3>Your Courses</h3>
       <CourseList 

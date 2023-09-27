@@ -16,8 +16,6 @@ function CourseList(props) {
     getUserCourses();
   }, []);
 
-// console.log(courses)
-
   return (
     <div className="course-list">
       {courses.map((course) => (

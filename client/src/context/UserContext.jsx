@@ -22,7 +22,7 @@ function UserContextProvider(props) {
   const initState = {
     user: JSON.parse(localStorage.getItem("user")) || {},
     token: localStorage.getItem("token") || "",
-    issues: [],
+    courses: [],
   };
 
   // Setting state for user's info and set initState from above as default
@@ -111,6 +111,7 @@ function UserContextProvider(props) {
   return (
     <UserContext.Provider
       value={{
+        userAxios,
         ...userState,
         signup,
         login,

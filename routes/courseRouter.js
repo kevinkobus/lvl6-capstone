@@ -1,9 +1,10 @@
 const express = require("express");
 const courseRouter = express.Router();
-const Course = require("../models/Course.js");
+// const User = require("../models/User")
+const Course = require("../models/Course");
+const Comment = require("../models/Comment.js");
 
-
-// Get courses by user id
+// Get courses by user
 courseRouter.get("/user", (req, res, next) => {
   Course.find({ user: req.auth._id })
     .then((foundCourses) => {
@@ -67,16 +68,16 @@ courseRouter.delete("/:courseId", (req, res, next) => {
 
 // Update/Edit a course's info
 courseRouter.put("/:courseId", (req, res, next) => {
-  Course.findOneAndUpdate(
+  Course.findByIdAndUpdate(
     { _id: req.params.courseId, user: req.auth._id },
     req.body,
     { new: true }
   )
     .then((updatedCourse) => {
-      if (!updatedCourse) {
-        return res.status(404).send("Course not found");
-      }
-      return res.status(200).send(updatedCourse);
+      // if (!updatedCourse) {
+      //   return res.status(404).send("Course not found");
+      // }
+      return res.status(201).send(updatedCourse);
     })
     .catch((err) => {
       res.status(500);

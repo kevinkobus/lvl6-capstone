@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext } from "react";
 import axios from "axios";
 // import { UserContext } from "./UserContext"
 
@@ -13,12 +13,8 @@ userAxios.interceptors.request.use((config) => {
 });
 
 function CourseContextProvider(props) {
-
-// const { 
-//   user: { username }
-//  } = useContext(UserContext)
-
   // State for Courses
+
   // Setting the initial state for user and all courses
   const initUserCourseState = {
     courses: [],
@@ -29,19 +25,21 @@ function CourseContextProvider(props) {
 
   // Setting state for user and all courses
   const [userCourseState, setUserCourseState] = useState(initUserCourseState);
-  const [publicCourseState, setPublicCourseState] =
-    useState(initPublicCourseState);
+  const [publicCourseState, setPublicCourseState] = useState(
+    initPublicCourseState
+  );
 
   // State for Comments
   // Setting the initial state of comments
-  const initComment = {
+  const initCommentState = {
     comments: [],
   };
 
   // Setting state for comments
-  const [commentState, setCommentState] = useState(initComment);
+  const [commentState, setCommentState] = useState(initCommentState);
 
   // Functions for Courses
+
   // Add Course
   function addUserCourse(newCourse) {
     userAxios
@@ -66,31 +64,9 @@ function CourseContextProvider(props) {
           courses: res.data,
         }));
       })
-      .catch((err) => console.log(err.response.data.errMsg));
+      .catch((err) => console.log(err));
+    // .catch((err) => console.log(err.response.data.errMsg));
   }
-
-  // Get user courses and associated comments
-  // function getUserCourses() {
-  //   userAxios
-  //     .get("/api/gatekeeper/course/user")
-  //     .then((res) => {
-  //       Promise.all(
-  //         res.data.map(async (course) => {
-  //           return {
-  //             ...course,
-  //             comments: await getIssueComments(course._id).then((comments) => {
-  //               return course.comments;
-  //             }),
-  //           };
-  //         })
-  //       );
-  //       setUserCourseState((prevState) => ({
-  //         ...prevState,
-  //         courses: res.data,
-  //       }));
-  //     })
-  //     .catch((err) => console.log(err.response.data.errMsg));
-  // }
 
   // Getting all (public) courses and their comments
   function getPublicCourses() {
@@ -112,7 +88,9 @@ function CourseContextProvider(props) {
       .then((res) => {
         setUserCourseState((prevState) => ({
           ...prevState,
-          courses: prevState.courses.filter((course) => course._id !== courseId),
+          courses: prevState.courses.filter(
+            (course) => course._id !== courseId
+          ),
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
@@ -120,6 +98,7 @@ function CourseContextProvider(props) {
 
   // Editing a user course
   function editCourse(courseId, updatedCourse) {
+    console.log('inside editcourse in context', 'courseId', courseId, 'updated course', updatedCourse)
     userAxios
       .put(`/api/gatekeeper/course/${courseId}`, updatedCourse)
       .then((res) => {
@@ -175,6 +154,8 @@ function CourseContextProvider(props) {
 
   // console.log(userCourseState)
 
+  // ----------- CRUD for Comments ------------
+
   // Getting all comments for testing purposes
   function getAllComments() {
     userAxios
@@ -203,7 +184,7 @@ function CourseContextProvider(props) {
 
   function addComment(newComment) {
     userAxios
-      .post("/api/gatekeeper/comment", newComment)
+      .post(`/api/gatekeeper/comment/${courseId}`, newComment)
       // .then((res) => console.log(res))
       .then((res) => {
         setCommentState((prevState) => ({
