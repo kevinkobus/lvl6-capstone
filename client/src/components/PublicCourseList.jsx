@@ -12,14 +12,15 @@ function PublicCourseList() {
   return (
     <div className="public-course-list">
       {publicCourses.map((publicCourse) => (
-          <PublicCourse 
-          {...publicCourse} 
-          key={publicCourse._id} 
-          
+        <PublicCourse
+          {...publicCourse}
+          key={publicCourse._id}
+          yesVote={publicCourse.yesVote}
+          noVote={publicCourse.noVote}
         />
       ))}
     </div>
   );
 }
 
-export default PublicCourseList
+export default PublicCourseList;

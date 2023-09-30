@@ -41,7 +41,7 @@ function CourseForm(props) {
           name="score"
           value={inputs.score}
           onChange={handleChange}
-          placeholder="Score"
+          placeholder="Best Score"
         />
         <input
           type="text"

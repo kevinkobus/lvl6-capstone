@@ -1,11 +1,23 @@
 import React, { useContext } from "react";
 import CommentList from "./CommentList";
-import { CourseContext } from "../context/CourseContext"
+import { CourseContext } from "../context/CourseContext";
+
 
 function PublicCourse(props) {
+
   const { courseName, state, city, par, score, website, _id, yesVote, noVote } = props;
 
-const { courses, createdBy } = useContext(CourseContext)
+  const { clickYesVote, clickNoVote } = useContext(CourseContext)
+
+  function handleYesVote(e) {
+    e.preventDefault()
+    clickYesVote(_id)
+  }
+
+  function handleNoVote(e) {
+    e.preventDefault()
+    clickNoVote(_id)
+  }
 
   return (
     <div className="course-box">
@@ -16,13 +28,13 @@ const { courses, createdBy } = useContext(CourseContext)
         <h3>Par: {par}</h3>
         <h3>Best Score: {score}</h3>
         <h3>Website: {website}</h3>
-        <h3>Posted by: {createdBy} </h3>
+        {/* <h3>Posted by: {createdBy} </h3> */}
       </div>
       <div className="course-box2">
         <h4>Do you like this course?</h4>
-        <button id="yes-btn">Yes</button>
+        <button id="yes-btn" onClick={handleYesVote}>Yes</button>
         <p>Yes votes: {yesVote.length}</p>
-        <button id="no-btn">No</button>
+        <button id="no-btn" onClick={handleNoVote}>No</button>
         <p>No votes: {noVote.length} </p>
       </div>
       <CommentList />

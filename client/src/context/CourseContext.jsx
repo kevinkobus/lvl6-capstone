@@ -115,15 +115,45 @@ function CourseContextProvider(props) {
   function clickYesVote(courseId) {
     userAxios
       .put(`/api/gatekeeper/course/yesVote/${courseId}`)
-      .then((res) => console.log(res))
+      .then((res) => {
+        setUserCourseState((prevState) => ({
+          ...prevState,
+          courses: prevState.courses.map((course) =>
+            course._id === courseId ? res.data : course
+          ),
+        }));
+        setPublicCourseState((prevState) => ({
+          ...prevState,
+          publicCourses: prevState.publicCourses.map((course) =>
+            course._id === courseId ? res.data : course
+          ),
+        }));
+      })
+      .catch((err) => console.log(err.response.data.errMsg));
   }
+
+  // "No" voting a course
+  function clickNoVote(courseId) {
+    userAxios
+      .put(`/api/gatekeeper/course/noVote/${courseId}`)
+      .then((res) => {
+        setUserCourseState((prevState) => ({
+          ...prevState,
+          courses: prevState.courses.map((course) =>
+            course._id === courseId ? res.data : course
+          ),
+        }));
+        setPublicCourseState((prevState) => ({
+          ...prevState,
+          publicCourses: prevState.publicCourses.map((course) =>
+            course._id === courseId ? res.data : course
+          ),
+        }));
+      })
+      .catch((err) => console.log(err.response.data.errMsg));
+  }
+
   
-// "No" voting a course
-function clickNoVote(courseId) {
-  userAxios
-    .put(`/api/gatekeeper/course/noVote/${courseId}`)
-    .then((res) => console.log(res))
-}
 
   // ----------- CRUD for Comments ------------
 

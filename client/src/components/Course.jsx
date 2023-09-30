@@ -35,6 +35,17 @@ function Course(props) {
     setEditToggle(!editToggle);
   }
 
+  function handleYesVote(e) {
+    e.preventDefault()
+    clickYesVote(_id)
+  }
+
+  function handleNoVote(e) {
+    e.preventDefault()
+    clickNoVote(_id)
+  }
+
+
   return (
     <div className="course-box">
       {!editToggle ? (
@@ -47,15 +58,15 @@ function Course(props) {
               <h3>Par: {par}</h3>
               <h3>Best Score: {score}</h3>
               <h3>Website: {website}</h3>
-              {/* <h3>Posted by: {username}</h3> */}
+              {/* <h3>Posted by: {createdBy</h3> */}
             </div>
             <div className="course-box2">
               <h4>Do you like this course?</h4>
-              <button id="yes-btn" onClick={() => clickYesVote(_id)}>
+              <button id="yes-btn" onClick={handleYesVote}>
                 Yes
               </button>
               <p>Yes votes: {yesVote.length}</p>
-              <button id="no-btn" onClick={() => clickNoVote(_id)}>
+              <button id="no-btn" onClick={handleNoVote}>
                 No
               </button>
               <p>No votes: {noVote.length}</p>
