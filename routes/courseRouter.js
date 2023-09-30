@@ -2,7 +2,7 @@ const express = require("express");
 const courseRouter = express.Router();
 // const User = require("../models/User")
 const Course = require("../models/Course");
-const Comment = require("../models/Comment.js");
+// const Comment = require("../models/Comment.js");
 
 // Get courses by user
 courseRouter.get("/user", (req, res, next) => {
@@ -85,7 +85,48 @@ courseRouter.put("/:courseId", (req, res, next) => {
     });
 });
 
-// Update Course for votes
+
+// Update Course for Yes/No votes
+// Yes vote
+// courseRouter.put("/yesVote/:courseId", (req, res, next) => {
+//   Course.findOneAndUpdate(
+//     { _id: req.params.courseId },
+//     { $addToSet: { yesVote: req.auth._id }, $pull: { noVote: req.auth._id } },
+//     { new: true }
+//   )
+//     .then((updatedCourse) => {
+//       return res.status(201).send(updatedCourse);
+//     })
+//     .catch((err) => {
+//       res.status(500);
+//       return next(err);
+//     });
+// });
+
+// No vote
+// courseRouter.put("/noVote/:courseId", (req, res, next) => {
+//   Course.findOneAndUpdate(
+//     { _id: req.params.courseId },
+//     { $addToSet: { noVote: req.auth._id }, $pull: { yesVote: req.auth._id } },
+//     { new: true }
+//   )
+//     .then((updatedCourse) => {
+//       return res.status(201).send(updatedCourse);
+//     })
+//     .catch((err) => {
+//       res.status(500);
+//       return next(err);
+//     });
+// });
+
+// // Get all votes for a course
+// courseRouter.get("votes/:courseId", (req, res, next) => {
+//   Course.findById(
+
+//   )
+// })
+
+
 // Update Course for comments
 
 module.exports = courseRouter;

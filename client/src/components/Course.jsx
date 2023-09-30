@@ -4,14 +4,14 @@ import { CourseContext } from "../context/CourseContext";
 import CommentList from "./CommentList";
 
 function Course(props) {
- 
-  const { courseName, state, city, par, score, website, _id } =
+  const { courseName, state, city, par, score, website, _id, noVote, yesVote } =
     props;
 
-  const { deleteCourse, editCourse } =
+  const { deleteCourse, editCourse, clickYesVote, clickNoVote } =
     useContext(CourseContext);
 
   const [editToggle, setEditToggle] = useState(false);
+
   const [editInputs, setEditInputs] = useState({
     courseName: courseName,
     state: state,
@@ -19,11 +19,11 @@ function Course(props) {
     par: par,
     score: score,
     website: website,
-  })
+  });
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setEditInputs(prevInputs => ({
+    setEditInputs((prevInputs) => ({
       ...prevInputs,
       [name]: value,
     }));
@@ -51,20 +51,25 @@ function Course(props) {
             </div>
             <div className="course-box2">
               <h4>Do you like this course?</h4>
-              <button id="yes-btn">Yes</button>
-              <p>Yes votes: 100</p>
-              {/* {yesVotes} */}
-              <button id="no-btn">No</button>
-              <p>No votes: 100</p>
-              {/* {noVotes} */}
+              <button id="yes-btn" onClick={() => clickYesVote(_id)}>
+                Yes
+              </button>
+              <p>Yes votes: {yesVote.length}</p>
+              <button id="no-btn" onClick={() => clickNoVote(_id)}>
+                No
+              </button>
+              <p>No votes: {noVote.length}</p>
             </div>
             <div className="course-box3">
-              <button id="edit-course-btn"
+              <button
+                id="edit-course-btn"
                 onClick={() => setEditToggle((prevToggle) => !prevToggle)}
               >
                 Edit
               </button>
-              <button id="delete-course-btn" onClick={() => deleteCourse(_id)}>Delete</button>
+              <button id="delete-course-btn" onClick={() => deleteCourse(_id)}>
+                Delete
+              </button>
             </div>
           </div>
           <CommentList />
@@ -79,7 +84,7 @@ function Course(props) {
             score={score}
             website={website}
             inputs={editInputs}
-            _id={_id} 
+            _id={_id}
             btnText="Save Edit"
             submit={handleCourseEdit}
             editToggle={editToggle}

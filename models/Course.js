@@ -25,34 +25,25 @@ const courseSchema = new Schema({
   website: {
     type: String,
   },
-  yesVotes: [
+  yesVote: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-      username: {
-        type: String,
-        required: true,
-      },
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   ],
-  noVotes: [
+  noVote: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-      username: {
-        type: String,
-        required: true,
-      },
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   ],
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
+  },
+  createdBy: {
+    type: String,
   },
   createdAt: {
     type: Date,

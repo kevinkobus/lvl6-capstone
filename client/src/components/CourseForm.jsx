@@ -1,28 +1,9 @@
-import React, { useState } from "react";
-// import { CourseContext } from "../context/CourseContext";
+import React from "react";
+
 
 function CourseForm(props) {
 
   const { inputs, submit, handleChange, btnText } = props
-
-  // const initInputs = {
-  //   courseName: props.courseName || "",
-  //   state: props.state || "",
-  //   city: props.city || "",
-  //   par: props.par || "",
-  //   score: props.score || "",
-  //   website: props.website || "",
-  // };
-
-  // const [inputs, setInputs] = useState(initInputs);
-
-  // function handleChange(e) {
-  //   const { name, value } = e.target;
-  //   setInputs((prevInputs) => ({
-  //     ...prevInputs,
-  //     [name]: value,
-  //   }));
-  // }
 
   return (
     <div className="course-form-container">

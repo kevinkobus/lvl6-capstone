@@ -25,10 +25,12 @@ function CourseList(props) {
           username={username}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          yesVote={course.yesVote}
+          noVote={course.noVote}
         />
       ))}
     </div>
   );
 }
 
-export default CourseList;
+export default CourseList;          
