@@ -9,7 +9,6 @@ CourseForm.prototypes = {
   type: PropTypes.string.isRequired,
 }
 
-
 function CourseForm(props) {
 
   const { inputs, submit, handleChange, btnText, children, type} = props

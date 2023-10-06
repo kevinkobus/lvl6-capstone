@@ -8,14 +8,6 @@
   text-decoration: none;
 }
 
-/* #root {
-  background-color: #eee9;
-}
-
-.App {
-  background-color: #eee9;
-} */
-
 /* NAVBAR STYLING */
 .navbar {
   display: flex;
@@ -33,6 +25,10 @@
 
 /* AUTH PAGE STYLING */
 .auth-container {
+  background-image: url("../assets/mountain-course.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -42,6 +38,7 @@
 .auth-container > p {
   margin: 18px;
   text-decoration: underline;
+  color: white;
 }
 
 .auth-title {
@@ -51,10 +48,14 @@
 }
 
 .auth-form {
-  border: 5px solid #005e23;
+  background-image: url("../assets/golf-ball-dimples.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #005e23;
   padding: 20px;
-  border-radius: 5px;
-  background-color: #87ceeb;
+  border-radius: 137px;
+  /* background-color: #87ceeb; */
   display: flex;
   flex-direction: column;
 }

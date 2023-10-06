@@ -43,7 +43,7 @@ function Profile(props) {
   return (
     <div className="profile">
       <h1>Welcome {username}!</h1>
-      <h3>Add an Course</h3>
+      <h3>Add an Golf Course</h3>
       <CourseForm  
           btnText="Add Course" 
           submit={handleSubmit}
