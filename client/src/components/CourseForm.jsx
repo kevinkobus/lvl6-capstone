@@ -1,12 +1,21 @@
 import React from "react";
+import PropTypes from "prop-types"
+
+CourseForm.prototypes = {
+  children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element.isRequired
+  ]),
+  type: PropTypes.string.isRequired,
+}
 
 
 function CourseForm(props) {
 
-  const { inputs, submit, handleChange, btnText } = props
+  const { inputs, submit, handleChange, btnText, children, type} = props
 
   return (
-    <div className="course-form-container">
+    <div className={`course-form-container ${type}`}>
       <form onSubmit={submit} className="course-form">
         <input
           type="text"
@@ -52,6 +61,7 @@ function CourseForm(props) {
         />
         <button id="add-course-btn">{btnText}</button>
       </form>
+      {children}
     </div>
   );
 }

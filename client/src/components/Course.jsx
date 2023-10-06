@@ -3,6 +3,9 @@ import CourseForm from "./CourseForm";
 import { CourseContext } from "../context/CourseContext";
 import CommentList from "./CommentList";
 
+
+
+
 function Course(props) {
   const { courseName, state, city, par, score, website, _id, noVote, yesVote } =
     props;
@@ -45,7 +48,6 @@ function Course(props) {
     clickNoVote(_id)
   }
 
-
   return (
     <div className="course-box">
       {!editToggle ? (
@@ -65,11 +67,11 @@ function Course(props) {
               <button id="yes-btn" onClick={handleYesVote}>
                 Yes
               </button>
-              <p>Yes votes: {yesVote.length}</p>
+              <p className="vote-yes">Yes votes: {yesVote.length}</p>
               <button id="no-btn" onClick={handleNoVote}>
                 No
               </button>
-              <p>No votes: {noVote.length}</p>
+              <p className="vote-no">No votes: {noVote.length}</p>
             </div>
             <div className="course-box3">
               <button
@@ -88,6 +90,7 @@ function Course(props) {
       ) : (
         <>
           <CourseForm
+            type="edit"
             courseName={courseName}
             state={state}
             city={city}
