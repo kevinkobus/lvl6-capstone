@@ -29,15 +29,6 @@ function CourseContextProvider(props) {
     initPublicCourseState
   );
 
-  // State for Comments
-  // Setting the initial state of comments
-  const initCommentState = {
-    comments: [],
-  };
-
-  // Setting state for comments
-  const [commentState, setCommentState] = useState(initCommentState);
-
   // Functions for Courses
 
   // Add Course
@@ -157,7 +148,16 @@ function CourseContextProvider(props) {
 
   // ----------- CRUD for Comments ------------
 
-  // Getting all comments for testing purposes
+// State for Comments
+  // Setting the initial state of comments
+  const initCommentState = {
+    comments: [],
+  };
+
+  // Setting state for comments
+  const [commentState, setCommentState] = useState(initCommentState);
+
+  // Getting all comments
   function getAllComments() {
     userAxios
       .get("/api/gatekeeper/comment")
@@ -170,7 +170,7 @@ function CourseContextProvider(props) {
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
-  // Get comments for an individual course for testing purposes
+  // Get comments for an individual course
   function getCourseComments(courseId) {
     userAxios
       .get(`/api/gatekeeper/comment/${courseId}`)
@@ -183,6 +183,7 @@ function CourseContextProvider(props) {
       .catch((err) => console.log(err.response.data.errMsg));
   }
 
+  // Adding a comment
   function addComment(newComment) {
     userAxios
       .post(`/api/gatekeeper/comment/${courseId}`, newComment)

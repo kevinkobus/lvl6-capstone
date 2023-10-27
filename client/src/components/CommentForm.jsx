@@ -4,10 +4,10 @@ import { UserContext } from "../context/UserContext";
 
 function CommentForm() {
 
-  const { addComment, comment, courseId, getCourseComments } = useContext(CourseContext);
-  const {
-    user: { username },
-  } = useContext(UserContext);
+  const { addComment, comment, courseId, getCourseComments, getAllComments } = useContext(CourseContext);
+  // const {
+  //   user: { username },
+  // } = useContext(UserContext);
 
   const initCommentInput = "";
   const [commentInput, setCommentInput] = useState(initCommentInput);
@@ -16,17 +16,17 @@ function CommentForm() {
 
   function handleCommentChange(e) {
     const { value } = e.target;
+    // console.log(value)
     setCommentInput(value);
   }
 
   function handleCommentSubmit(e) {
     e.preventDefault();
-    const enteredComment = {
+    const newComment = {
       comment,
-      postedBy: username,
-      course: _id,
+      courseId: _id,
     };
-    addComment(enteredComment, courseId)
+    addComment(newComment, courseId)
       .then(() => {
         setCommentInput(initCommentInput);
       })
@@ -35,7 +35,8 @@ function CommentForm() {
 
   function handleToggle() {
     setCommentOpen(!commentOpen);
-    getCourseComments(courseId)
+    // getCourseComments(courseId)
+    getAllComments(courseId)
   }
 
   return (
