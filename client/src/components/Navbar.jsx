@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar(props) {
+// console.log("Render Navbar")
+
   const { logout } = props;
   return (
     <div className="navbar">

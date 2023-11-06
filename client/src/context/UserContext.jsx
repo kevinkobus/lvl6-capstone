@@ -16,6 +16,7 @@ userAxios.interceptors.request.use((config) => {
 
 // Creating context provider for user signup/login and authentication to export
 function UserContextProvider(props) {
+// console.log("Render UserContext")
 
   const { getUserCourses, getPublicCourses } = useContext(CourseContext);
 

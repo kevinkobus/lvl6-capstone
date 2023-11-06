@@ -1,6 +1,7 @@
 import React from 'react'
 
 function AuthForm(props){
+// console.log("Render AuthForm")
   const {
     handleChange, 
     handleSubmit, 

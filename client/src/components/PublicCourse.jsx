@@ -3,6 +3,8 @@ import CommentList from "./CommentList";
 import { CourseContext } from "../context/CourseContext";
 
 function PublicCourse(props) {
+// console.log("Render PublicCourse")
+
   const { courseName, state, city, par, score, website, _id, yesVote, noVote } =
     props;
 

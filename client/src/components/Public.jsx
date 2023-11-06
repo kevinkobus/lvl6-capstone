@@ -3,6 +3,8 @@ import PublicCourseList from "./PublicCourseList.jsx";
 import { CourseContext } from "../context/CourseContext.jsx";
 
 function Public() {
+// console.log("Render Public")
+
   const { publicCourses } = useContext(CourseContext);
 
   return (

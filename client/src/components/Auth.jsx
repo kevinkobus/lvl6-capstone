@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext"
 const initInputs = { username: "", password: "" }
 
 function Auth(){
+  // console.log("Render Auth")
   const [inputs, setInputs] = useState(initInputs)
   const [toggle, setToggle] = useState(false)
 

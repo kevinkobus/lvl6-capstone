@@ -10,6 +10,7 @@ CourseForm.prototypes = {
 }
 
 function CourseForm(props) {
+// console.log("Render CourseForm")
 
   const { inputs, submit, handleChange, btnText, children, type} = props
 

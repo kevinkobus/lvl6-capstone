@@ -4,16 +4,26 @@ import CommentForm from "./CommentForm.jsx";
 import { CourseContext } from "../context/CourseContext.jsx";
 
 function CommentList(props) {
-  const { comments, courseId } = useContext(CourseContext);
+  // console.log("Render CommentList");
+const { courseId } = props
+ 
+ 
+  const { comments } = useContext(CourseContext);
+
+  // console.log(comments)
 
   const courseComments = comments.filter(
     (comment) => comment.course === courseId
   );
 
+  // console.log(courseComments)
+
   return (
     <div className="comment-section">
       <div>
-        <CommentForm />
+        <CommentForm
+        courseId={courseId}
+        />
       </div>
 
       {courseComments.map((comment) => (

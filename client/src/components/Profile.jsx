@@ -5,6 +5,8 @@ import { UserContext } from "../context/UserContext";
 import { CourseContext } from "../context/CourseContext"
 
 function Profile(props) {
+  // console.log("Render Profile")
+
   const {
     addUserCourse,
     courses,

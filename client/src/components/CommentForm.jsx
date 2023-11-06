@@ -2,9 +2,12 @@ import React, { useState, useContext } from "react";
 import { CourseContext } from "../context/CourseContext";
 import { UserContext } from "../context/UserContext";
 
-function CommentForm() {
+function CommentForm(props) {
+// console.log("Render Comment Form")
 
-  const { addComment, comment, courseId, getCourseComments, getAllComments } = useContext(CourseContext);
+const { courseId } = props
+
+  const { addComment, comment, getAllComments } = useContext(CourseContext);
   // const {
   //   user: { username },
   // } = useContext(UserContext);
@@ -24,7 +27,7 @@ function CommentForm() {
     e.preventDefault();
     const newComment = {
       comment,
-      courseId: _id,
+      courseId,
     };
     addComment(newComment, courseId)
       .then(() => {

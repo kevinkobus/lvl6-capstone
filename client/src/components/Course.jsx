@@ -7,6 +7,8 @@ import CommentList from "./CommentList";
 
 
 function Course(props) {
+// console.log("Render Course")
+
   const { courseName, state, city, par, score, website, _id, noVote, yesVote } =
     props;
 
@@ -85,7 +87,9 @@ function Course(props) {
               </button>
             </div>
           </div>
-          <CommentList />
+          <CommentList
+            courseId={_id}
+          />
         </>
       ) : (
         <>

@@ -13,6 +13,8 @@ userAxios.interceptors.request.use((config) => {
 });
 
 function CourseContextProvider(props) {
+// console.log("Render CourseContext")
+
   // State for Courses
 
   // Setting the initial state for user and all courses
