@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
-// import { UserContext } from "./UserContext"
+import { UserContext } from "./UserContext";
 
 const CourseContext = createContext();
 
@@ -13,7 +13,7 @@ userAxios.interceptors.request.use((config) => {
 });
 
 function CourseContextProvider(props) {
-// console.log("Render CourseContext")
+  // console.log("Render CourseContext")
 
   // State for Courses
 
@@ -147,61 +147,10 @@ function CourseContextProvider(props) {
   }
 
   
-
-  // ----------- CRUD for Comments ------------
-
-// State for Comments
-  // Setting the initial state of comments
-  const initCommentState = {
-    comments: [],
-  };
-
-  // Setting state for comments
-  const [commentState, setCommentState] = useState(initCommentState);
-
-  // Getting all comments
-  function getAllComments() {
-    userAxios
-      .get("/api/gatekeeper/comment")
-      .then((res) => {
-        setCommentState((prevState) => ({
-          ...prevState,
-          comments: res.data,
-        }));
-      })
-      .catch((err) => console.log(err.response.data.errMsg));
-  }
-
-  // Get comments for an individual course
-  function getCourseComments(courseId) {
-    userAxios
-      .get(`/api/gatekeeper/comment/${courseId}`)
-      .then((res) => {
-        setCommentState((prevState) => ({
-          ...prevState,
-          comments: res.data,
-        }));
-      })
-      .catch((err) => console.log(err.response.data.errMsg));
-  }
-
-  // Adding a comment
-  function addComment(newComment) {
-    userAxios
-      .post(`/api/gatekeeper/comment/${courseId}`, newComment)
-      // .then((res) => console.log(res))
-      .then((res) => {
-        setCommentState((prevState) => ({
-          ...prevState,
-          comments: [...prevState, res.data],
-        }));
-      })
-      .catch((err) => console.log(err.response.data.errMsg));
-  }
-
   return (
     <CourseContext.Provider
       value={{
+        userAxios,
         ...userCourseState,
         ...publicCourseState,
         addUserCourse,
@@ -211,10 +160,6 @@ function CourseContextProvider(props) {
         editCourse,
         clickYesVote,
         clickNoVote,
-        ...commentState,
-        getAllComments,
-        getCourseComments,
-        addComment,
       }}
     >
       {props.children}

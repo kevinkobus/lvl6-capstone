@@ -1,45 +1,40 @@
 import React, { useState, useContext } from "react";
 import { CourseContext } from "../context/CourseContext";
 import { UserContext } from "../context/UserContext";
+import { CommentContext } from "../context/CommentContext";
 
 function CommentForm(props) {
-// console.log("Render Comment Form")
+  // console.log("Render Comment Form")
+ 
+  const { courseId } = props;
 
-const { courseId } = props
+  const { addComment, comment, getAllComments } = useContext(CommentContext);
 
-  const { addComment, comment, getAllComments } = useContext(CourseContext);
-  // const {
-  //   user: { username },
-  // } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
-  const initCommentInput = "";
-  const [commentInput, setCommentInput] = useState(initCommentInput);
+  
+  const [commentInput, setCommentInput] = useState("");
 
   const [commentOpen, setCommentOpen] = useState(false);
 
   function handleCommentChange(e) {
     const { value } = e.target;
-    // console.log(value)
     setCommentInput(value);
   }
 
   function handleCommentSubmit(e) {
     e.preventDefault();
     const newComment = {
-      comment,
-      courseId,
+      comment: commentInput,
     };
-    addComment(newComment, courseId)
-      .then(() => {
-        setCommentInput(initCommentInput);
-      })
-      .catch((err) => console.log(err.response.data.errMsg));
+    // console.log(courseId, newComment, user._id)
+    addComment(courseId, newComment);
+    setCommentInput("");
   }
 
   function handleToggle() {
     setCommentOpen(!commentOpen);
-    // getCourseComments(courseId)
-    getAllComments(courseId)
+    getAllComments();
   }
 
   return (
@@ -55,16 +50,17 @@ const { courseId } = props
               maxLength="160"
               name="comment"
               type="text"
-              value={commentInput} // or should this be just comment from the new comment object?
+              value={comment}
               onChange={handleCommentChange}
               placeholder="Add a comment...160 character max"
             />
-            <button id="post-comment-btn"type="submit">Post Comment</button>
+            <button id="post-comment-btn" type="submit">
+              Post Comment
+            </button>
           </form>
         </div>
       )}
       <h3>Comments:</h3>
-
     </>
   );
 }

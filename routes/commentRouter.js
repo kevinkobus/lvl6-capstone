@@ -12,18 +12,15 @@ commentRouter.get("/", (req, res, next) => {
     })
     .catch((err) => {
       res.status(500);
-      return next(err)
-    })
-})
+      return next(err);
+    });
+});
 
 // Add new comment - POST version
 commentRouter.post("/:courseId", (req, res, next) => {
-  const enteredComment = {
-    user: req.auth._id,
-    comment: req.body.comment,
-    course: req.params.courseId,
-  };
-  const newComment = new Comment(enteredComment);
+  req.body.user = req.auth._id;
+  req.body.course = req.params.courseId; // Link the comment to the course
+  const newComment = new Comment(req.body);
   newComment
     .save()
     .then((savedComment) => {
