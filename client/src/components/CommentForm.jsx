@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { CourseContext } from "../context/CourseContext";
+// import { CourseContext } from "../context/CourseContext";
 import { UserContext } from "../context/UserContext";
 import { CommentContext } from "../context/CommentContext";
 
@@ -8,7 +8,7 @@ function CommentForm(props) {
  
   const { courseId } = props;
 
-  const { addComment, comment, getAllComments } = useContext(CommentContext);
+  const { addComment, comment } = useContext(CommentContext);
 
   const { user } = useContext(UserContext);
 
@@ -34,7 +34,6 @@ function CommentForm(props) {
 
   function handleToggle() {
     setCommentOpen(!commentOpen);
-    getAllComments();
   }
 
   return (
@@ -60,7 +59,7 @@ function CommentForm(props) {
           </form>
         </div>
       )}
-      <h3>Comments:</h3>
+      <h2>Comments</h2>
     </>
   );
 }

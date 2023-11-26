@@ -74,7 +74,7 @@ function UserContextProvider(props) {
     setUserState({
       user: {},
       token: "",
-      issues: [],
+      courses: [],
     });
   }
 

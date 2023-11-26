@@ -24,6 +24,7 @@ function CommentContextProvider(props) {
   const [commentState, setCommentState] = useState(initCommentState);
 
   // Getting all comments
+  
   function getAllComments() {
     userAxios
       .get("/api/gatekeeper/comment")
@@ -35,7 +36,9 @@ function CommentContextProvider(props) {
       })
       .catch((err) => console.log(err.response.data.errMsg));
   }
+  
 
+  
   // Adding a comment
   function addComment(courseId, newComment) {
     userAxios

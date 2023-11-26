@@ -37,12 +37,6 @@ const courseSchema = new Schema({
       ref: "User",
     },
   ],
-  comment: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Course",
-    },
-  ],
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

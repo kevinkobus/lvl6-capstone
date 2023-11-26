@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Comment from "./Comment.jsx";
 import CommentForm from "./CommentForm.jsx";
 // import { CourseContext } from "../context/CourseContext.jsx";
@@ -7,12 +7,18 @@ import { CommentContext } from "../context/CommentContext";
 
 function CommentList(props) {
   // console.log("Render CommentList");
-  const { courseId } = props;
 
-  const { comments } = useContext(CommentContext);
+  const { courseId } = props;
+  // console.log(courseId)
+
+  const { getAllComments, comments } = useContext(CommentContext);
+
+  useEffect(() => {
+    getAllComments();
+  }, []);
 
   // console.log(comments)
-
+// console.log(typeof(comments))
   // Filter the comments for each course
   const courseComments = comments.filter(
     (comment) => comment.course === courseId
@@ -26,7 +32,7 @@ function CommentList(props) {
       </div>
 
       {courseComments.map((comment) => (
-        <Comment {...comment} key={comment._id} />
+        <Comment {...comment} key={comment._id} courseId={courseId} />
       ))}
     </div>
   );

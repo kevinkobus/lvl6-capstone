@@ -5,18 +5,19 @@ import Auth from "./components/Auth";
 import Profile from "./components/Profile";
 import Public from "./components/Public";
 import { UserContext } from "./context/UserContext";
-// import { CourseContext } from "./context/CourseContext"
+// import { CommentContext } from "./context/CommentContext"
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   // console.log("Render App")
 
-//   const { getAllComments } = useContext(CourseContext)
-//   // GET all comments once when the application loads using the context's getAllComments function
-//   useEffect(() => {
-//     getAllComments();
+  // const { getAllComments } = useContext(CommentContext)
+  // GET all comments once when the application loads using the context's getAllComments function
+  // useEffect(() => {
+  //   getAllComments();
 // }, []); // Empty dependency array ensures this effect runs only once when the app starts
 
+// console.log("Got all comments, App")
 
   const { token, logout } = useContext(UserContext);
 
