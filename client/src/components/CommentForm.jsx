@@ -39,7 +39,7 @@ function CommentForm(props) {
   return (
     <>
       <div className="comment-toggle-btn" onClick={handleToggle}>
-        {commentOpen ? "Close Comment section🔼 " : "Leave a Comment 🔽"}
+        {commentOpen ? "Close Comment section🔼 " : "Post a comment about this course 🔽"}
       </div>
       {commentOpen && (
         <div className="comment-form-container">
@@ -59,7 +59,6 @@ function CommentForm(props) {
           </form>
         </div>
       )}
-      <h2>Comments</h2>
     </>
   );
 }
